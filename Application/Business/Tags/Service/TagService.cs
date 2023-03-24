@@ -5,6 +5,8 @@ using AutoMapper;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Commands.Create;
 using Domain.Entities;
+using Application.RequestHandler.Tags.Commands.Update;
+using Application.RequestHandler.Tags.Commands.Delete;
 
 namespace Application.Business.Tags.Service;
 
@@ -24,7 +26,7 @@ public class TagService : ITagService
     // Commands
 
     /// <summary>
-    /// GetTagById
+    /// CreateTag
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -39,6 +41,51 @@ public class TagService : ITagService
 
         await _dataAccessLayer.CreateTag(tag);
 
+
+        var response = mapper.MapToResponse(tag);
+
+        return response;
+    }
+
+    /// <summary>
+    /// CreateTag
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<UpdateTagResponse> UpdateTag(UpdateTagRequestQuery request)
+    {
+        var oldEntity = await _dataAccessLayer.GetTagById(request.Id);
+        if (oldEntity == null)
+            return null;
+
+        var mapper = new UpdateMapper();
+
+        var newEntity = mapper.MapToNewEntity(request);
+
+        // Set Properties
+        oldEntity.Name = newEntity.Name;
+
+        await _dataAccessLayer.UpdateTag(oldEntity);
+
+        var response = mapper.MapToResponse(oldEntity);
+
+        return response;
+    }
+
+    /// <summary>
+    /// CreateTag
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<DeleteTagResponse> DeleteTag(DeleteTagRequestQuery request)
+    {
+        var tag = await _dataAccessLayer.GetTagById(request.Id);
+        if (tag == null)
+            return null;
+
+        await _dataAccessLayer.DeleteTag(tag);
+
+        var mapper = new DeleteMapper();
 
         var response = mapper.MapToResponse(tag);
 

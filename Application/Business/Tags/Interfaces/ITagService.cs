@@ -1,4 +1,6 @@
 using Application.RequestHandler.Tags.Commands.Create;
+using Application.RequestHandler.Tags.Commands.Delete;
+using Application.RequestHandler.Tags.Commands.Update;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
 
@@ -21,4 +23,8 @@ public interface ITagService
     Task<List<GetTagsResponse>> GetAllTags();
 
     Task<CreateTagResponse> CreateTag(CreateTagRequestQuery request);
+
+    Task<UpdateTagResponse> UpdateTag(UpdateTagRequestQuery request);
+
+    Task<DeleteTagResponse> DeleteTag(DeleteTagRequestQuery request);
 }

@@ -24,9 +24,21 @@ public class TagDataAccess
         return await _dbContext.Tags.ToListAsync();
     }
 
-    internal async Task CreateTag(Tag tag)
+    public async Task CreateTag(Tag tag)
     {
         _dbContext.Tags.Add(tag);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateTag(Tag tag)
+    {
+        _dbContext.Tags.Update(tag);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteTag(Tag tag)
+    {
+        _dbContext.Tags.Remove(tag);
         await _dbContext.SaveChangesAsync();
     }
 }

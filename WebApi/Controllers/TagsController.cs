@@ -5,7 +5,6 @@ using Application.RequestHandler.Tags.Commands.Update;
 using Application.RequestHandler.Tags.Commands.UserTag;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;

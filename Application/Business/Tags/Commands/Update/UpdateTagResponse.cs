@@ -1,5 +1,3 @@
-using MediatR;
-
 namespace Application.RequestHandler.Tags.Commands.Update;
 
 public class UpdateTagResponse

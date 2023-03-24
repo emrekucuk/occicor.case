@@ -1,7 +1,6 @@
 using Application.Business.Tags.Interfaces;
 using Application.Business.Tags.DataAccess;
 using Application.RequestHandler.Tags.Queries.Detail;
-using AutoMapper;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Commands.Create;
 using Application.RequestHandler.Tags.Commands.Update;
@@ -16,11 +15,9 @@ namespace Application.Business.Tags.Service;
 public class TagService : ITagService
 {
     private readonly TagDataAccess _dataAccessLayer;
-    private readonly IMapper _mapper;
-    public TagService(TagDataAccess dataAccessLayer, IMapper mapper)
+    public TagService(TagDataAccess dataAccessLayer)
     {
         _dataAccessLayer = dataAccessLayer;
-        _mapper = mapper;
     }
 
     // Commands

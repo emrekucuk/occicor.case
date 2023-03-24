@@ -33,11 +33,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Occicor Case", Version = "v1" });
 
-    //    // Set the comments path for the Swagger JSON and UI.
-    //    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    //    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    //    c.IncludeXmlComments(xmlPath);
-
     // For avoid Scheme Collision for the same name classes
     c.CustomSchemaIds(x => x.FullName);
 

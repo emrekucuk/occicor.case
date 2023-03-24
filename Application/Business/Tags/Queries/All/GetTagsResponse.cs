@@ -1,5 +1,3 @@
-using MediatR;
-
 namespace Application.RequestHandler.Tags.Queries.All;
 
 public class GetTagsResponse

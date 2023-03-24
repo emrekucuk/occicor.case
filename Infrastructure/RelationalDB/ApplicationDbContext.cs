@@ -40,27 +40,27 @@ public class ApplicationDbContext : DbContext
             new Tag()
             {
                 Id = Guid.Parse("7ecbd3c6-ae49-4d9f-a5a9-198b49f8fb30"),
-                Name = "Software Developer",
+                Name = "Elma",
             },
             new Tag()
             {
                 Id = Guid.Parse("4502a8b0-7d98-4516-87ad-0d45c76febb0"),
-                Name = "Backend"
+                Name = "Armut"
             },
             new Tag()
             {
                 Id = Guid.Parse("ce0f63de-b59a-4a09-a5fe-4fa52de402ba"),
-                Name = "Frontend"
+                Name = "Ayva"
             },
             new Tag()
             {
                 Id = Guid.Parse("41766635-e22f-4b71-a1fc-c974b720475e"),
-                Name = "Fullstack"
+                Name = "Çilek"
             },
             new Tag()
             {
                 Id = Guid.Parse("49c305f9-5927-4df4-9b6d-afa0c34771b5"),
-                Name = "Web Developer"
+                Name = "Muz"
             }
         );
 

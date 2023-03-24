@@ -2,6 +2,9 @@ using System.Reflection;
 using Application.Business.Tags.DataAccess;
 using Application.Business.Tags.Interfaces;
 using Application.Business.Tags.Service;
+using Application.Business.Users.DataAccess;
+using Application.Business.Users.Interfaces;
+using Application.Business.Users.Service;
 using Infrastructure.RelationalDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -24,8 +27,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddTransient<TagDataAccess>();
+builder.Services.AddTransient<UserDataAccess>();
 builder.Services.AddTransient<ApplicationDbContext>();
 
 

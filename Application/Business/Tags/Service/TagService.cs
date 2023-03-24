@@ -4,7 +4,6 @@ using Application.RequestHandler.Tags.Queries.Detail;
 using AutoMapper;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Commands.Create;
-using Domain.Entities;
 using Application.RequestHandler.Tags.Commands.Update;
 using Application.RequestHandler.Tags.Commands.Delete;
 using Application.RequestHandler.Tags.Commands.UserTag;

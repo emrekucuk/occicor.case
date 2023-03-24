@@ -1,3 +1,4 @@
+using Application.RequestHandler.Tags.Commands.Create;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
 
@@ -18,4 +19,6 @@ public interface ITagService
     /// <param name="id"></param>
     /// <returns></returns>
     Task<List<GetTagsResponse>> GetAllTags();
+
+    Task<CreateTagResponse> CreateTag(CreateTagRequestQuery request);
 }

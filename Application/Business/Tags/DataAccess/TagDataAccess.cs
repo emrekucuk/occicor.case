@@ -1,3 +1,4 @@
+using Application.RequestHandler.Tags.Commands.Create;
 using Domain.Entities;
 using Infrastructure.RelationalDB;
 using Microsoft.EntityFrameworkCore;
@@ -23,4 +24,9 @@ public class TagDataAccess
         return await _dbContext.Tags.ToListAsync();
     }
 
+    internal async Task CreateTag(Tag tag)
+    {
+        _dbContext.Tags.Add(tag);
+        await _dbContext.SaveChangesAsync();
+    }
 }

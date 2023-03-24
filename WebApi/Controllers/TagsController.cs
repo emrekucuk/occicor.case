@@ -1,4 +1,5 @@
 using Application.Business.Tags.Interfaces;
+using Application.RequestHandler.Tags.Commands.Create;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
 using MediatR;
@@ -15,6 +16,15 @@ public class TagsController : ControllerBase
     public TagsController(ITagService tagService)
     {
         _tagService = tagService;
+    }
+
+    // Commands
+
+    [HttpPost("[action]")]
+    public async Task<ActionResult<CreateTagResponse>> Create([FromBody] CreateTagRequestQuery request)
+    {
+        var result = await _tagService.CreateTag(request);
+        return Ok(result);
     }
 
 

@@ -3,6 +3,8 @@ using Application.Business.Tags.DataAccess;
 using Application.RequestHandler.Tags.Queries.Detail;
 using AutoMapper;
 using Application.RequestHandler.Tags.Queries.All;
+using Application.RequestHandler.Tags.Commands.Create;
+using Domain.Entities;
 
 namespace Application.Business.Tags.Service;
 
@@ -19,6 +21,31 @@ public class TagService : ITagService
         _mapper = mapper;
     }
 
+    // Commands
+
+    /// <summary>
+    /// GetTagById
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public async Task<CreateTagResponse> CreateTag(CreateTagRequestQuery request)
+    {
+        if (request.Name == null)
+            return null;
+
+        var mapper = new CreateMapper();
+
+        var tag = mapper.MapToNewEntity(request);
+
+        await _dataAccessLayer.CreateTag(tag);
+
+
+        var response = mapper.MapToResponse(tag);
+
+        return response;
+    }
+
+    // Queries
 
     /// <summary>
     /// GetTagById
@@ -37,6 +64,10 @@ public class TagService : ITagService
         return response;
     }
 
+    /// <summary>
+    /// GetAllTags
+    /// </summary>
+    /// <returns></returns>
     public async Task<List<GetTagsResponse>> GetAllTags()
     {
         var tags = await _dataAccessLayer.GetAllTags();

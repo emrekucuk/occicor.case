@@ -2,6 +2,7 @@ using Application.Business.Tags.Interfaces;
 using Application.RequestHandler.Tags.Commands.Create;
 using Application.RequestHandler.Tags.Commands.Delete;
 using Application.RequestHandler.Tags.Commands.Update;
+using Application.RequestHandler.Tags.Commands.UserTag;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
 using MediatR;
@@ -40,6 +41,13 @@ public class TagsController : ControllerBase
     public async Task<ActionResult<DeleteTagResponse>> Delete([FromBody] DeleteTagRequestQuery request)
     {
         var result = await _tagService.DeleteTag(request);
+        return Ok(result);
+    }
+
+    [HttpPost("[action]")]
+    public async Task<ActionResult<UserTagResponse>> UserTag([FromBody] UserTagRequestQuery request)
+    {
+        var result = await _tagService.UserTag(request);
         return Ok(result);
     }
 

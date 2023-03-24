@@ -7,6 +7,7 @@ using Application.RequestHandler.Tags.Commands.Create;
 using Domain.Entities;
 using Application.RequestHandler.Tags.Commands.Update;
 using Application.RequestHandler.Tags.Commands.Delete;
+using Application.RequestHandler.Tags.Commands.UserTag;
 
 namespace Application.Business.Tags.Service;
 
@@ -48,9 +49,8 @@ public class TagService : ITagService
     }
 
     /// <summary>
-    /// CreateTag
+    /// UpdateTag
     /// </summary>
-    /// <param name="id"></param>
     /// <returns></returns>
     public async Task<UpdateTagResponse> UpdateTag(UpdateTagRequestQuery request)
     {
@@ -73,9 +73,8 @@ public class TagService : ITagService
     }
 
     /// <summary>
-    /// CreateTag
+    /// DeleteTag
     /// </summary>
-    /// <param name="id"></param>
     /// <returns></returns>
     public async Task<DeleteTagResponse> DeleteTag(DeleteTagRequestQuery request)
     {
@@ -88,6 +87,33 @@ public class TagService : ITagService
         var mapper = new DeleteMapper();
 
         var response = mapper.MapToResponse(tag);
+
+        return response;
+    }
+
+    /// <summary>
+    /// CreateUserTag
+    /// </summary>
+    /// <returns></returns>
+    public async Task<UserTagResponse> UserTag(UserTagRequestQuery request)
+    {
+        var oldRelUserTags = await _dataAccessLayer.GetRelUserTagsByUserId(request.UserId);
+        if (oldRelUserTags == null || oldRelUserTags.Count == 0)
+            return null;
+
+        var mapper = new UserTagMapper();
+
+        _dataAccessLayer.RemoveRangeRelUserTags(oldRelUserTags);
+
+        // Map to RellTitleCourseUser and Add to Db
+        var relUserTags = mapper.MapToNewRelUserTags(request.TagIds, request.UserId);
+        if (relUserTags != null && relUserTags.Count > 0)
+            _dataAccessLayer.AddRelUserTag(relUserTags);
+
+        // SaveChange to Db
+        await _dataAccessLayer.SaveEverything();
+
+        var response = mapper.MapToResponse(relUserTags[0].UserId);
 
         return response;
     }

@@ -41,4 +41,28 @@ public class TagDataAccess
         _dbContext.Tags.Remove(tag);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<List<RelUserTag>> GetRelUserTagsByUserId(Guid userId)
+    {
+        return await _dbContext.RelUserTags.Where(r => r.UserId == userId).ToListAsync();
+    }
+
+
+    public void RemoveRangeRelUserTags(List<RelUserTag> relUserTags)
+    {
+        _dbContext.RelUserTags.RemoveRange(relUserTags);
+    }
+
+
+    public void AddRelUserTag(List<RelUserTag> relUserTags)
+    {
+        _dbContext.RelUserTags.AddRange(relUserTags);
+    }
+
+
+    public async Task SaveEverything()
+    {
+        await _dbContext.SaveChangesAsync();
+    }
+
 }

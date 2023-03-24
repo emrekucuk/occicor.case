@@ -1,6 +1,7 @@
 using Application.RequestHandler.Tags.Commands.Create;
 using Application.RequestHandler.Tags.Commands.Delete;
 using Application.RequestHandler.Tags.Commands.Update;
+using Application.RequestHandler.Tags.Commands.UserTag;
 using Application.RequestHandler.Tags.Queries.All;
 using Application.RequestHandler.Tags.Queries.Detail;
 
@@ -27,4 +28,6 @@ public interface ITagService
     Task<UpdateTagResponse> UpdateTag(UpdateTagRequestQuery request);
 
     Task<DeleteTagResponse> DeleteTag(DeleteTagRequestQuery request);
+
+    Task<UserTagResponse> UserTag(UserTagRequestQuery request);
 }
